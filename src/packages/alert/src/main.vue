@@ -63,9 +63,6 @@ export default {
       visible: true
     };
   },
-  created(){
-      console.log(this)
-  },
   methods: {
     close() {
       this.visible = false;

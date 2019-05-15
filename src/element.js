@@ -6,8 +6,22 @@ import BreadcrumbItem from "./packages/breadcrumb-item/index";
 import Button from "./packages/button/index";
 import ButtonGroup from "./packages/button-group/index";
 import Card from "./packages/card/index";
-
-const components = [Alert, Aside, Badge, Breadcrumb, BreadcrumbItem,Button,ButtonGroup,Card];
+import Form from "./packages/form/index";
+import FormItem from "./packages/form-item/index";
+import Input from "./packages/input/index";
+const components = [
+  Alert,
+  Aside,
+  Badge,
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  ButtonGroup,
+  Card,
+  Form,
+  FormItem,
+  Input
+];
 
 const install = function(Vue) {
   components.forEach(component => {

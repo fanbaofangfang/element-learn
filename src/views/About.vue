@@ -1,10 +1,10 @@
 <template>
   <div>
-    <el-aside width="500px">aside</el-aside>
+    <!-- <el-aside width="500px">aside</el-aside>
     <el-badge :value="100" :hidden="false">
       <button>123</button>
-    </el-badge>
-    <el-breadcrumb separator="/">
+    </el-badge> -->
+    <!-- <el-breadcrumb separator="/">
       <el-breadcrumb-item>首页</el-breadcrumb-item>
       <el-breadcrumb-item>首页</el-breadcrumb-item>
     </el-breadcrumb>
@@ -17,7 +17,7 @@
           </template>
           <div>content</div>
       </el-card>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -27,7 +27,9 @@ export default {
     return {};
   },
   mounted() {},
-  methods: {},
+  methods: {
+      
+  },
   watch: {}
 };
 </script>
