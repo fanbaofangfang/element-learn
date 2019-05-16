@@ -1,7 +1,8 @@
-import AutoComplete from './src/autocomplete-suggestions.vue';
+import ElAutocomplete from './src/autocomplete';
 
-AutoComplete.install = function(Vue){
-    Vue.component(AutoComplete.name,AutoComplete)
-}
+/* istanbul ignore next */
+ElAutocomplete.install = function(Vue) {
+  Vue.component(ElAutocomplete.name, ElAutocomplete);
+};
 
-export default AutoComplete;
+export default ElAutocomplete;

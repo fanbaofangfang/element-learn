@@ -208,7 +208,6 @@ export default {
         model,
         { firstFields: true },
         (errors, invalidFields) => {
-            console.log(errors,invalidFields,'invalid')
           this.validateState = !errors ? "success" : "error";
           this.validateMessage = errors ? errors[0].message : "";
 

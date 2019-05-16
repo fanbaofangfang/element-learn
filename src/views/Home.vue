@@ -16,17 +16,18 @@
       { type: 'number', message: '密码必须为数字值'}
     ]"
     >
-      <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+      <el-input   suffix-icon="el-icon-date" v-model="ruleForm.pass" type="text" @select="selectText">
+      </el-input>
     </el-form-item>
     <!-- <el-form-item label="确认密码" prop="checkPass">
       <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="年龄" prop="age">
       <el-input v-model.number="ruleForm.age"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="姓名" required>
-      <el-input v-model="ruleForm.name"></el-input>
-    </el-form-item>-->
+      <el-input v-model="ruleForm.name" prefix-icon="el-icon-delete"></el-input>
+    </el-form-item>
 
     <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
     <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -76,7 +77,7 @@ export default {
     };
     return {
       ruleForm: {
-        pass: "",
+        pass: "123456",
         checkPass: "",
         age: "",
         name: ""
@@ -99,6 +100,9 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    selectText(value){
+        console.log(value,1245689)
     }
   }
 };

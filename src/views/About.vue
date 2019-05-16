@@ -3,7 +3,7 @@
     <!-- <el-aside width="500px">aside</el-aside>
     <el-badge :value="100" :hidden="false">
       <button>123</button>
-    </el-badge> -->
+    </el-badge>-->
     <!-- <el-breadcrumb separator="/">
       <el-breadcrumb-item>首页</el-breadcrumb-item>
       <el-breadcrumb-item>首页</el-breadcrumb-item>
@@ -17,19 +17,19 @@
           </template>
           <div>content</div>
       </el-card>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      
+    };
   },
   mounted() {},
-  methods: {
-      
-  },
+  methods: {},
   watch: {}
 };
 </script>

@@ -9,6 +9,7 @@ import Card from "./packages/card/index";
 import Form from "./packages/form/index";
 import FormItem from "./packages/form-item/index";
 import Input from "./packages/input/index";
+import ScrollBar from "./packages/scrollbar/index";
 const components = [
   Alert,
   Aside,
@@ -20,7 +21,8 @@ const components = [
   Card,
   Form,
   FormItem,
-  Input
+  Input,
+  ScrollBar
 ];
 
 const install = function(Vue) {
