@@ -9,9 +9,8 @@ import './packages/theme-chalk/src/index.scss';
 Vue.config.productionTip = false;
 
 element.install(Vue);
-
 Vue.use(iView);
-new Vue({
+const app = new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");

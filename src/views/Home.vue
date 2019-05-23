@@ -1,108 +1,69 @@
 <template>
-  <el-form
-    :model="ruleForm"
-    status-icon
-    :rules="rules"
-    ref="ruleForm"
-    label-width="100px"
-    class="demo-ruleForm"
-  >
-    <el-form-item
-      required
-      label="密码"
-      prop="pass"
-      :rules="[
-      { required: true, message: '密码不能为空'},
-      { type: 'number', message: '密码必须为数字值'}
-    ]"
-    >
-      <el-input   suffix-icon="el-icon-date" v-model="ruleForm.pass" type="text" @select="selectText">
-      </el-input>
-    </el-form-item>
-    <!-- <el-form-item label="确认密码" prop="checkPass">
-      <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="年龄" prop="age">
-      <el-input v-model.number="ruleForm.age"></el-input>
-    </el-form-item> -->
-    <el-form-item label="姓名" required>
-      <el-input v-model="ruleForm.name" prefix-icon="el-icon-delete"></el-input>
-    </el-form-item>
-
-    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-    <el-button @click="resetForm('ruleForm')">重置</el-button>
-  </el-form>
+  <div>
+    <DatePicker
+      type="daterange"
+      placeholder="Select date and time(Excluding seconds)"
+      style="width: 300px"
+      :show-week-numbers="true"
+      v-model="timeValue"
+    ></DatePicker>
+    <button @click="prevWeek">上一周</button>
+    <button @click="nextWeek">下一周</button>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import axios from "axios";
+import moment from "moment";
 export default {
   name: "home",
   data() {
-    var checkAge = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("年龄不能为空"));
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error("请输入数字值"));
-        } else {
-          if (value < 18) {
-            callback(new Error("必须年满18岁"));
-          } else {
-            callback();
-          }
-        }
-      }, 1000);
-    };
-    var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
-      } else {
-        if (this.ruleForm.checkPass !== "") {
-          this.$refs.ruleForm.validateField("checkPass");
-        }
-        callback();
-      }
-    };
-    var validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请再次输入密码"));
-      } else if (value !== this.ruleForm.pass) {
-        callback(new Error("两次输入密码不一致!"));
-      } else {
-        callback();
-      }
-    };
     return {
-      ruleForm: {
-        pass: "123456",
-        checkPass: "",
-        age: "",
-        name: ""
-      },
-      rules: {
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
-        age: [{ validator: checkAge, trigger: "blur" }]
-      }
+      fileList: [],
+      extraData: {},
+      timeValue: [],
+      weekTime: 24 * 60 * 60 * 1000
     };
   },
+  mounted() {
+    this.timeValue = this.getTime(Date.now());
+    console.log(new Date().getDay());
+    // axios
+    //   .get("https://testapi.robo2025.com/common/qiniu/upload_token")
+    //   .then(res => {
+    //     this.extraData = {
+    //       token: res.data,
+    //       key: "/test/test/test/upload"
+    //     };
+    //   });
+  },
   methods: {
-    submitForm(formName) {
-      const p = this.$refs[formName].validate();
-      p.then((res, invalidFields) => {
-        console.log(res, invalidFields, "1");
-      }).catch((valid, invalidFields) => {
-        console.log(valid, invalidFields, "3");
-      });
+    getTime(time, currentWeekDay) {
+      if (currentWeekDay) {
+        return [
+          time - (currentWeekDay - 1) * this.weekTime,
+          time + (7 - currentWeekDay) * this.weekTime
+        ];
+      }
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    prevWeek() {
+      this.timeValue = this.getTime(this.timeValue[0] - this.weekTime * 7);
     },
-    selectText(value){
-        console.log(value,1245689)
+    nextWeek() {
+      this.timeValue = this.getTime(this.timeValue[1]);
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleExceed(files, fileList) {
+      console.log(files, fileList);
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
     }
   }
 };

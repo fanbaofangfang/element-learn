@@ -1,23 +1,27 @@
 <template>
   <div>
-    <!-- <el-aside width="500px">aside</el-aside>
-    <el-badge :value="100" :hidden="false">
-      <button>123</button>
-    </el-badge>-->
-    <!-- <el-breadcrumb separator="/">
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
-    </el-breadcrumb>
-    <el-button type="primary">这是一个按钮</el-button>
-    <div>
-      <p>card组件</p>
-      <el-card shadow="hover">
-          <template v-slot:header>
-              <i>123</i>
-          </template>
-          <div>content</div>
-      </el-card>
-    </div>-->
+    <el-form
+      :model="ruleForm"
+      :rules="rules"
+      ref="ruleForm"
+      label-width="100px"
+      class="demo-ruleForm"
+    >
+      <el-form-item label="活动名称" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="活动名称" prop="desc">
+        <el-input v-model="ruleForm.desc"></el-input>
+      </el-form-item>
+      <el-form-item label="活动名称">
+        <el-input v-model="ruleForm.pwd"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <button type="primary" @click="submitForm('ruleForm')">立即创建</button>
+        <button @click="resetForm('ruleForm')">重置</button>
+      </el-form-item>
+    </el-form>
+    123456
   </div>
 </template>
 
@@ -25,11 +29,40 @@
 export default {
   data() {
     return {
-      
+      ruleForm: {
+        name: '',
+        desc: "",
+        pwd:""
+      },
+      rules: {
+        name: [
+          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        ],
+        desc: [{ required: true, message: "请选择活动区域", trigger: "blur" }]
+      }
     };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    submitForm(formName) {
+        // this.$refs[formName].validateField(['desc','name'],(error,fieldsvalue) => {
+        //     console.log(error,fieldsvalue,'1111')
+        // })
+    //   this.$refs[formName].validate((valid,fieldsValue) => {
+    //     if (valid) {
+    //       alert("submit!");
+    //     } else {
+    //       console.log("error submit!!");
+    //       console.log(fieldsValue)
+    //       return false;
+    //     }
+    //   });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    }
+  },
   watch: {}
 };
 </script>
