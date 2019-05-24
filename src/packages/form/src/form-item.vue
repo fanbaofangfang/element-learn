@@ -193,9 +193,7 @@
           callback();
           return true;
         }
-
         this.validateState = 'validating';
-
         const descriptor = {};
         if (rules && rules.length > 0) {
           rules.forEach(rule => {
@@ -203,16 +201,12 @@
           });
         }
         descriptor[this.prop] = rules;
-
         const validator = new AsyncValidator(descriptor);
         const model = {};
-
         model[this.prop] = this.fieldValue;
-
         validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
-
           callback(this.validateMessage, invalidFields);
           this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
         });
@@ -233,13 +227,14 @@
           path = path.replace(/:/, '.');
         }
         let prop = getPropByPath(model, path, true);
-
         this.validateDisabled = true;
         if (Array.isArray(value)) {
           prop.o[prop.k] = [].concat(this.initialValue);
         } else {
           prop.o[prop.k] = this.initialValue;
         }
+        console.log(prop,1);
+        console.log(this.prop,2)
 
         this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
@@ -250,12 +245,10 @@
 
         const prop = getPropByPath(formRules, this.prop || '');
         formRules = formRules ? (prop.o[this.prop || ''] || prop.v) : [];
-
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
       getFilteredRule(trigger) {
         const rules = this.getRules();
-
         return rules.filter(rule => {
           if (!rule.trigger || trigger === '') return true;
           if (Array.isArray(rule.trigger)) {
